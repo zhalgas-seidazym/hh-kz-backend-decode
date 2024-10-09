@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 module.exports = {
     development: {
         username: 'admin',
@@ -7,5 +9,11 @@ module.exports = {
         dialect: 'postgres',
         port: 5432
     },
-    production: {}
+    production: {
+        dialectOptions: {
+            ssl: {
+                ca: fs.readFileSync('/config/ca-certificate.crt')
+            }
+        }
+    }
 }

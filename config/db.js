@@ -1,5 +1,5 @@
 const {Sequelize} = require('sequelize')
-const fs = require('fs')
+// const fs = require('fs')
 
 const dbConf = require('./config');
 
@@ -9,13 +9,14 @@ if(process.env.NODE_ENV === "production"){
         host: dbConf.production.host,
         dialect: dbConf.production.dialect,
         port: dbConf.production.port,
-        dialectOptions: {
-            ssl: {
-                ca: fs.readFileSync('/config/ca-certificate.crt')
-            }
-        }
+        dialectOptions: dbConf.production.dialectOptions
+        // {
+        //     ssl: {
+        //         ca: fs.readFileSync('/config/ca-certificate.crt')
+        //     }
+        // }
     })
-}else {
+} else {
     sequelize = new Sequelize(dbConf.development.database, dbConf.development.username, dbConf.development.password, {
         host: dbConf.development.host,
         dialect: dbConf.development.dialect
