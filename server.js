@@ -24,7 +24,7 @@ app.use(require('./app/specializations/routes'))
 app.use(require('./app/vacancies/routes'))
 app.use(require('./app/applies/routes'))
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log('Server is listening on port ' + PORT + '\n'
         + 'http://localhost:' + PORT)

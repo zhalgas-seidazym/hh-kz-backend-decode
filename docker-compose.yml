@@ -10,3 +10,19 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_DB=hh
     image: postgres:14.13-alpine3.20
+
+  node_app:
+    container_name: node_app
+    build: .
+    ports:
+      - "0:3000"
+    depends_on:
+      - hh_db
+    command: 
+      sh -c "npm install && npm run migrate && npm run seed && npm run dev"
+    environment:
+      - DB_HOST=hh_db
+      - DB_PORT=5432
+      - DB_USER=admin
+      - DB_PASSWORD=root
+      - DB_NAME=hh
