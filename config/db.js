@@ -19,10 +19,12 @@ if(process.env.NODE_ENV === "production"){
 } else {
     sequelize = new Sequelize(dbConf.development.database, dbConf.development.username, dbConf.development.password, {
         host: dbConf.development.host,
-        dialect: dbConf.development.dialect
+        dialect: dbConf.development.dialect,
+        port: dbConf.development.port
     })
 }
 
+console.log(dbConf.development.port)
 
 sequelize
 .authenticate()

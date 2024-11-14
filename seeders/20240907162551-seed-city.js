@@ -1,6 +1,6 @@
 'use strict';
 
-const Country = require('../app/region/Country')
+const Country = require('../app/regions/Country')
 
 module.exports = {
   async up(queryInterface, Sequelize) {

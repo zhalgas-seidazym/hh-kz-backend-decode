@@ -7,13 +7,13 @@ module.exports = {
         database: 'hh',
         host: 'localhost',
         dialect: 'postgres',
-        port: 5432
+        port: 5435
     },
-    production: {
-        dialectOptions: {
-            ssl: {
-                ca: fs.readFileSync('/config/ca-certificate.crt')
-            }
-        }
-    }
+    // production: {
+    //     dialectOptions: {
+    //         ssl: {
+    //             ca: fs.readFileSync('/config/ca-certificate.crt')
+    //         }
+    //     }
+    // }
 }
