@@ -24,7 +24,6 @@ if(process.env.NODE_ENV === "production"){
     })
 }
 
-console.log(dbConf.development.port)
 
 sequelize
 .authenticate()
