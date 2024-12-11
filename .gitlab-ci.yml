@@ -1,0 +1,42 @@
+stages:
+  - build
+  - test
+  - deploy
+
+# Этап сборки
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker-compose -v # Проверяем версию Docker Compose
+    - docker-compose build # Строим контейнеры для проекта
+  only:
+    - main # Выполнять на ветке main
+
+# Этап тестирования
+test:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker-compose up -d hh_db # Запускаем базу данных
+    - docker-compose up -d node_app # Запускаем приложение
+    - sleep 10 # Ждем, пока сервисы полностью запустятся
+    - docker-compose exec node_app npm test # Запускаем тесты внутри контейнера
+    - docker-compose down # Останавливаем контейнеры после тестирования
+  only:
+    - main
+
+# Этап деплоя
+deploy:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker-compose up -d # Запускаем контейнеры в фоновом режиме
+  only:
+    - main
