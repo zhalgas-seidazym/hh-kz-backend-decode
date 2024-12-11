@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const sendMail = require('../utils/sendMail')
 const AuthCode = require('./models/AuthCode')
